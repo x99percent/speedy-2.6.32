@@ -117,15 +117,15 @@ static struct clkctl_acpu_speed acpu_freq_tbl[] = {
 	/* ACPU >= 806.4MHz requires MSMC1 @ 1.2V. Voting for
 	 * AXI @ 192MHz accomplishes this implicitly. 806.4MHz
 	 * is updated to 1024MHz at runtime for QSD8x55. */
-	{ 806400, PLL_2,    3, 0,  192000, 1000, VDD_RAW(1000) },
+	{ 806400, PLL_2,    3, 0,  192000, 1025, VDD_RAW(1025) },
 	/* Make sure any freq based from PLL_2 is a multiple of 19200! */
-	{ 902400, PLL_2,    3, 0,  192000, 1025, VDD_RAW(1025) },
-	{ 1017600, PLL_2,   3, 0,  192000, 1050, VDD_RAW(1050) },
-	{ 1094400, PLL_2,   3, 0,  192000, 1075, VDD_RAW(1075) },
-	{ 1209600, PLL_2,   3, 0,  192000, 1125, VDD_RAW(1125) },
-	{ 1305600, PLL_2,   3, 0,  192000, 1200, VDD_RAW(1200) },
-	{ 1401600, PLL_2,   3, 0,  192000, 1250, VDD_RAW(1250) },
-	{ 1497600, PLL_2,   3, 0,  192000, 1300, VDD_RAW(1300) },
+	{ 902400, PLL_2,    3, 0,  192000, 1050, VDD_RAW(1050) },
+	{ 1017600, PLL_2,   3, 0,  192000, 1100, VDD_RAW(1100) },
+	{ 1094400, PLL_2,   3, 0,  192000, 1150, VDD_RAW(1150) },
+	{ 1209600, PLL_2,   3, 0,  192000, 1200, VDD_RAW(1200) },
+	{ 1305600, PLL_2,   3, 0,  192000, 1250, VDD_RAW(1250) },
+	{ 1401600, PLL_2,   3, 0,  192000, 1300, VDD_RAW(1300) },
+	{ 1497600, PLL_2,   3, 0,  192000, 1325, VDD_RAW(1325) },
 	{ 1555200, PLL_2,   3, 0,  192000, 1350, VDD_RAW(1350) },
 	{ 1612800, PLL_2,   3, 0,  192000, 1400, VDD_RAW(1400) },
 	{ 1708800, PLL_2,   3, 0,  192000, 1400, VDD_RAW(1400) },
