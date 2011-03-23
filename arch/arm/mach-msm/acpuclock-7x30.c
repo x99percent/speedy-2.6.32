@@ -108,9 +108,9 @@ static struct clkctl_acpu_speed acpu_freq_tbl[] = {
 	{ 24576,  SRC_LPXO, 0, 0,  30720,   900, VDD_RAW(900) },
 	{ 61440,  PLL_3,    5, 11, 61440,   900, VDD_RAW(900) },
 	{ 122880, PLL_3,    5, 5,  61440,   900, VDD_RAW(900) },
-	{ 184320, PLL_3,    5, 4,  61440,   900, VDD_RAW(900) },
+	{ 184320, PLL_3,    5, 4,  61440,   800, VDD_RAW(800) },
 	{ MAX_AXI_KHZ, SRC_AXI, 1, 0, 61440,  900, VDD_RAW(900) },
-	{ 245760, PLL_3,    5, 2,  61440,   900, VDD_RAW(900) },
+	{ 245760, PLL_3,    5, 2,  61440,   850, VDD_RAW(850) },
 	{ 368640, PLL_3,    5, 1,  122800,  900, VDD_RAW(900) },
 	{ 460800, PLL_1,    2, 0,  153600,  975, VDD_RAW(975) },
 	{ 614400, PLL_1,    2, 0,  153600,  975, VDD_RAW(975) },
@@ -354,7 +354,7 @@ static unsigned int acpuclk_get_current_vdd(void)
 
 	vdd_raw = msm_spm_get_vdd();
 
-	for (vdd_mv = 850; vdd_mv <= 1450; vdd_mv += 25)
+	for (vdd_mv = 800; vdd_mv <= 1450; vdd_mv += 25)
 		if (VDD_RAW(vdd_mv) == vdd_raw)
 			break;
 
@@ -377,7 +377,7 @@ static int acpuclk_update_freq_tbl(unsigned int acpu_khz, unsigned int acpu_vdd)
 		pr_err("%s: acpuclk invalid speed %d\n", __func__, acpu_khz);
 		return -1;
 	}
-	if (acpu_vdd > 1450 || acpu_vdd < 850) {
+	if (acpu_vdd > 1450 || acpu_vdd < 800) {
 		pr_err("%s: acpuclk vdd out of ranage, %d\n",
 			__func__, acpu_vdd);
 		return -2;
