@@ -80,24 +80,25 @@ struct clkctl_acpu_speed {
 static struct clock_state drv_state = { 0 };
 
 static struct cpufreq_frequency_table freq_table[] = {
-	{ 0, 245760 },
-	{ 1, 368640 },
-	{ 2, 460800 },
-	{ 3, 614400 },
-	{ 4, 768000 },
-	{ 5, 806400 },
-	{ 6, 902400 },
-	{ 7, 1017600 },
-	{ 8, 1094400 },
-	{ 9, 1209600 },
-	{ 10, 1305600 },
-	{ 11, 1401600 },
-	{ 12, 1497600 },
-	{ 13, 1555200 },
-	{ 14, 1612800 },
-	{ 15, 1708800 },
-	{ 16, 1804800 },
-	{ 17, CPUFREQ_TABLE_END },
+	{ 0, 184320 },
+	{ 1, 245760 },
+	{ 2, 368640 },
+	{ 3, 460800 },
+	{ 4, 614400 },
+	{ 5, 768000 },
+	{ 6, 806400 },
+	{ 7, 902400 },
+	{ 8, 1017600 },
+	{ 9, 1094400 },
+	{ 10, 1209600 },
+	{ 11, 1305600 },
+	{ 12, 1401600 },
+	{ 13, 1497600 },
+	{ 14, 1555200 },
+	{ 15, 1612800 },
+	{ 16, 1708800 },
+	{ 17, 1804800 },
+	{ 18, CPUFREQ_TABLE_END },
 };
 
 /* Use negative numbers for sources that can't be enabled/disabled */
@@ -107,9 +108,9 @@ static struct clkctl_acpu_speed acpu_freq_tbl[] = {
 	{ 24576,  SRC_LPXO, 0, 0,  30720,   900, VDD_RAW(900) },
 	{ 61440,  PLL_3,    5, 11, 61440,   900, VDD_RAW(900) },
 	{ 122880, PLL_3,    5, 5,  61440,   900, VDD_RAW(900) },
-	{ 184320, PLL_3,    5, 4,  61440,   900, VDD_RAW(900) },
+	{ 184320, PLL_3,    5, 4,  61440,   800, VDD_RAW(800) },
 	{ MAX_AXI_KHZ, SRC_AXI, 1, 0, 61440,  900, VDD_RAW(900) },
-	{ 245760, PLL_3,    5, 2,  61440,   900, VDD_RAW(900) },
+	{ 245760, PLL_3,    5, 2,  61440,   850, VDD_RAW(850) },
 	{ 368640, PLL_3,    5, 1,  122800,  900, VDD_RAW(900) },
 	{ 460800, PLL_1,    2, 0,  153600,  975, VDD_RAW(975) },
 	{ 614400, PLL_1,    2, 0,  153600,  975, VDD_RAW(975) },
@@ -353,7 +354,7 @@ static unsigned int acpuclk_get_current_vdd(void)
 
 	vdd_raw = msm_spm_get_vdd();
 
-	for (vdd_mv = 850; vdd_mv <= 1450; vdd_mv += 25)
+	for (vdd_mv = 800; vdd_mv <= 1450; vdd_mv += 25)
 		if (VDD_RAW(vdd_mv) == vdd_raw)
 			break;
 
@@ -376,7 +377,7 @@ static int acpuclk_update_freq_tbl(unsigned int acpu_khz, unsigned int acpu_vdd)
 		pr_err("%s: acpuclk invalid speed %d\n", __func__, acpu_khz);
 		return -1;
 	}
-	if (acpu_vdd > 1450 || acpu_vdd < 850) {
+	if (acpu_vdd > 1450 || acpu_vdd < 800) {
 		pr_err("%s: acpuclk vdd out of ranage, %d\n",
 			__func__, acpu_vdd);
 		return -2;
